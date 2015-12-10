@@ -28,7 +28,7 @@ How to Create a Web Barcode Reader with Node Barcode Extension
     npm install restify
     ```
 3. Run **server.js**:
-4. Visit ** http://< ip >:< port >** to scan barcode with Webcam.
+4. Visit **http://< ip >:< port >** to scan barcode with Webcam.
 ![webcam barcode reader](http://www.codepool.biz/wp-content/uploads/2015/12/node_dbr.png)
 
 Blog
