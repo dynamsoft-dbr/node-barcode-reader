@@ -25,7 +25,7 @@ How to Create a Web Barcode Reader with Node Barcode Extension
 2. Install **restify** to build a simple REST web services:
 
     ```
-    npm install
+    npm install restify
     ```
 3. Run **server.js**:
 4. Visit ** http://< ip >:< port >** to scan barcode with Webcam.
