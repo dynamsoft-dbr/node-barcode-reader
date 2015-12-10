@@ -11,7 +11,7 @@ Downloads for Node Barcode Extension
 Get Started
 -----------
 1. Run ```node-gyp configure install``` to generate **build** folder.
-2. Import the project to Visual Studio. And then correctly configure directories of DBR header files and libraries. In addition, add the custom build event: ```copy "{installation directory}\Dynamsoft\Barcode Reader 2.0 Trial\Redist\C_C++\*.dll" "$(OutDir)"```
+2. Import the project to Visual Studio. And then correctly configure directories of DBR header files and libraries. In addition, add the custom build event: ```copy "<Dynamsoft Barcode Reader>\Redist\C_C++\*.dll" "$(OutDir)"```
 3. Build the project to generate **dbr.node**.
 4. Run **dbr.js** with the following command.
 ```cmd
