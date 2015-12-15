@@ -33,8 +33,8 @@ How to Create a Web Barcode Reader with Node Barcode Extension
 
 Blog
 -----
-[Making Dynamsoft Barcode SDK an Addon for Node.js][4]
-[How to Make Web Barcode Reader with NodeJS REST Framework][5]
+* [Making Dynamsoft Barcode SDK an Addon for Node.js][4]
+* [How to Make Web Barcode Reader with NodeJS REST Framework][5]
 
 [1]:http://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx
 [2]:http://restify.com/
