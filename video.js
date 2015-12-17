@@ -13,7 +13,6 @@ var buttonGo = document.getElementById('go');
 var barcode_result = document.getElementById('dbr');
 
 var isPaused = false;
-var intervalId = 0;
 var videoWidth = 640,
   videoHeight = 480;
 var mobileVideoWidth = 240,
@@ -117,9 +116,7 @@ function toggleCamera() {
 }
 
 // add button event
-buttonGo.onclick = function() {
-  window.clearInterval(intervalId);
-  console.log("clean id: " + intervalId);
+buttonGo.onclick = function () {
   if (isPC) {
     canvas.style.display = 'none';
   } else {
@@ -151,64 +148,60 @@ if (navigator.getUserMedia || navigator.mozGetUserMedia) {
 
 // scan barcode
 function scanBarcode() {
-  intervalId = window.setInterval(function() {
-    if (isPaused) {
-      return;
-    }
+  if (isPaused) {
+    return;
+  }
 
-    var data = null,
-      newblob = null;
+  var data = null,
+    context = null,
+    width = 0,
+    height = 0,
+    dbrCanvas = null;
 
-    var context = null,
-      width = 0,
-      height = 0,
-      dbrCanvas = null;
-    if (isPC) {
-      context = ctx;
-      width = videoWidth;
-      height = videoHeight;
-      dbrCanvas = canvas;
-    } else {
-      context = mobileCtx;
-      width = mobileVideoWidth;
-      height = mobileVideoHeight;
-      dbrCanvas = mobileCanvas;
-    }
+  if (isPC) {
+    context = ctx;
+    width = videoWidth;
+    height = videoHeight;
+    dbrCanvas = canvas;
+  } else {
+    context = mobileCtx;
+    width = mobileVideoWidth;
+    height = mobileVideoHeight;
+    dbrCanvas = mobileCanvas;
+  }
 
-    context.drawImage(videoElement, 0, 0, width, height);
-    // convert canvas to base64
-    var base64 = dbrCanvas.toDataURL('image/png', 1.0);
-    var data = base64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
-    var imgData = JSON.stringify(data);
-    $.ajax({
-      url: '/dbr',
-      dataType: 'json',
-      data: imgData,
-      type: 'POST',
-      success: function(result) {
-        console.log(result);
-        if (isPaused) {
-          return;
-        }
-        var barcode_result = document.getElementById('dbr');
-        barcode_result.textContent = result;
+  context.drawImage(videoElement, 0, 0, width, height);
+  // convert canvas to base64
+  var base64 = dbrCanvas.toDataURL('image/png', 1.0);
+  var data = base64.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+  var imgData = JSON.stringify(data);
+  $.ajax({
+    url: '/dbr',
+    dataType: 'json',
+    data: imgData,
+    type: 'POST',
+    success: function (result) {
+      console.log(result);
+      if (isPaused) {
+        return;
+      }
+      var barcode_result = document.getElementById('dbr');
+      barcode_result.textContent = result;
 
-        // display barcode result
-        if (result.indexOf("No barcode") == -1) {
-          isPaused = true;
-          window.clearInterval(intervalId);
-          console.log("Get result, clean id: " + intervalId);
-          buttonGo.disabled = false;
-          if (isPC) {
-            canvas.style.display = 'block';
-          } else {
-            mobileCanvas.style.display = 'block';
-          }
+      // display barcode result
+      if (result.indexOf("No barcode") == -1) {
+        isPaused = true;
+        buttonGo.disabled = false;
+        if (isPC) {
+          canvas.style.display = 'block';
+        } else {
+          mobileCanvas.style.display = 'block';
         }
       }
-    });
-
-
-  }, 200);
-  console.log("create id: " + intervalId);
+      else {
+        setTimeout(scanBarcode, 200);
+      }
+    }
+  });
 }
+

@@ -1,7 +1,12 @@
 // http://restify.com/
 var restify = require('restify');
 var fs = require('fs');
-var server = restify.createServer();
+var server = restify.createServer({
+  certificate: fs.readFileSync('f:\\openssl\\key-cert.pem'),
+  key: fs.readFileSync('f:\\openssl\\key.pem'),
+  name: 'MyApp',
+});
+
 var dbr = require('./build/Release/dbr');
 
 server.use(restify.bodyParser());
@@ -45,9 +50,11 @@ server.post('/dbr', function create(req, res, next) {
         }
 
         if (!hasResult) {
-          final_result = "No barcode detected";
+          final_result = "No barcode detected. ";
         }
-
+        
+        final_result += new Date();
+        
         res.send(200, final_result);
         next();
       }
