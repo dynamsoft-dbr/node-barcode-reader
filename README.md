@@ -11,7 +11,7 @@ Downloads for Node Barcode Extension
 Get Started
 -----------
 1. Run ```node-gyp configure install``` to generate **build** folder.
-2. Import the project to Visual Studio. And then correctly configure directories of DBR header files and libraries. In addition, add the custom build event: ```copy "{installation directory}\Dynamsoft\Barcode Reader 2.0 Trial\Redist\C_C++\*.dll" "$(OutDir)"```
+2. Import the project to Visual Studio. And then correctly configure directories of DBR header files and libraries. In addition, add the custom build event: ```copy "<Dynamsoft Barcode Reader>\Redist\C_C++\*.dll" "$(OutDir)"```
 3. Build the project to generate **dbr.node**.
 4. Run **dbr.js** with the following command.
 ```cmd
@@ -28,14 +28,16 @@ How to Create a Web Barcode Reader with Node Barcode Extension
     npm install restify
     ```
 3. Run **server.js**:
-4. Visit ** http://< ip >:< port >** to scan barcode with Webcam.
+4. Visit **http://< ip >:< port >** to scan barcode with Webcam.
 ![webcam barcode reader](http://www.codepool.biz/wp-content/uploads/2015/12/node_dbr.png)
 
 Blog
 -----
-[Making Dynamsoft Barcode SDK an Addon for Node.js][4]
+* [Making Dynamsoft Barcode SDK an Addon for Node.js][4]
+* [How to Make Web Barcode Reader with NodeJS REST Framework][5]
 
 [1]:http://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx
 [2]:http://restify.com/
 [3]:http://www.dynamsoft.com/Downloads/Dynamic-Barcode-Reader-Download.aspx
 [4]:http://www.codepool.biz/making-barcode-addon-for-nodejs.html
+[5]:http://www.codepool.biz/web-barcode-reader-nodejs-rest.html
